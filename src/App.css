@@ -1,0 +1,12 @@
+.container {
+    margin: auto;
+    width: fit-content;
+}
+
+.btn-delete:hover > .mdi-delete-empty {
+    display: block;
+}
+
+.btn-delete:hover > .mdi-delete {
+    display: none;
+}
