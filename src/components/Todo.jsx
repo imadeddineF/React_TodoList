@@ -1,13 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faTrashRestoreAlt } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Todo = (props) => {
-    const trashOne = <FontAwesomeIcon icon={faTrash} />;
-    const trashTwo = <FontAwesomeIcon icon={faTrashRestoreAlt} />;
-
+    const xMark = <FontAwesomeIcon icon={faXmark} size="lg" />;
     return (
-        <div className="flex justify-between h-12 max-w-md px-3 py-1 m-auto mt-2 text-gray-900 bg-gray-300 border rounded-xl">
+        <div className="flex justify-between pl-5 text-gray-900 bg-white border-b h-14">
             <div
                 onClick={props.toggleComplete}
                 className="flex items-center my-auto cursor-pointer focus:line-through"
@@ -16,7 +14,8 @@ const Todo = (props) => {
                     id=""
                     type="checkbox"
                     value=""
-                    class="accent-violet-500 w-5 h-5 mr-3"
+                    class="accent-violet-500 w-5 h-5 mr-3 cursor-pointer"
+                    checked={props.todo.complete ? true : false}
                 />
                 <p
                     for="checkbox"
@@ -32,12 +31,9 @@ const Todo = (props) => {
             </div>
             <button
                 onClick={props.onDelete}
-                className="flex items-center p-4 text-base tracking-wide text-red-500 transition-all border-gray-300 rounded-full cursor-pointer btn-delete bg-none hover:bg-red-100"
+                className="px-4 py-3 my-auto mr-2 text-base text-gray-500 transition-all rounded-full cursor-pointer w-fit h-fit bg-none hover:bg-gray-50"
             >
-                <span class="mdi-delete transition-all">{trashOne}</span>
-                <span class="mdi-delete-empty hidden transition-all">
-                    {trashTwo}
-                </span>
+                {xMark}
             </button>
         </div>
     );

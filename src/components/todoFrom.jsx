@@ -10,22 +10,22 @@ const TodoForm = (props) => {
             text: text,
             complete: false,
         });
-        // delete text after sybmit
+        // delete text after submit
         setText("");
     };
     return (
         <form
-            className="flex justify-center gap-16 mt-36 mb-7"
+            className="flex w-full bg-white h-14 mb-7"
             onSubmit={handleSubmit}
         >
             <input
-                className="px-4 py-1 border border-black rounded-md input-field w-96 h-11"
+                className="w-full h-full px-4 input-field focus:outline-none"
                 type="text"
                 onChange={(e) => setText(e.target.value)}
                 value={text}
             />
             <button
-                className="px-6 py-1 transition-all border border-black btn rounded-xl hover:bg-gray-100"
+                className="w-24 h-full transition-all border-l border-gray-300 hover:bg-slate-100 "
                 onClick={handleSubmit}
             >
                 Add
