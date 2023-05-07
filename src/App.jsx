@@ -5,6 +5,9 @@ import Todo from "./components/Todo";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { FaMoon } from "react-icons/fa";
+import { HiSun } from "react-icons/hi";
+
 export default function App() {
   let [todos, setTodos] = useState(() => {
     const localData = localStorage.getItem("todos");
@@ -72,11 +75,15 @@ export default function App() {
       setDarkToggle("light");
     }
   }, []);
+
+  const [themeIcon, setThemeIcon] = useState(null);
   useEffect(() => {
     if (darkToggle === "dark") {
       document.documentElement.classList.add("dark");
+      setThemeIcon(<FaMoon />);
     } else {
       document.documentElement.classList.remove("dark");
+      setThemeIcon(<HiSun />);
     }
   }, [darkToggle]);
   const handleThemeSwitcher = () => {
@@ -88,17 +95,22 @@ export default function App() {
     <>
       {/* Dark mode button  */}
       <button
-        className="bg-slate-800 text-white rounded-full absolute w-16 h-16 top-8 right-8 hover:opacity-75"
-        onClick={handleThemeSwitcher}
-      >
-        X
+        className="absolute flex items-center justify-center w-16 h-16 text-3xl text-white duration-200 ease-linear rounded-full bg-blue-300/30 dark:bg-slate-800 top-8 right-8 hover:opacity-75"
+        onClick={handleThemeSwitcher}>
+        {themeIcon}
       </button>
 
       {/* background image */}
-      <div className="h-[350px] w-full absolute top-0 left-0 -z-20 dark:h-screen dark:bg-[#110522]">
-        {darkToggle === "dark" ? null : (
+      <div className="h-[350px] duration-200 ease-linear w-full absolute top-0 left-0 -z-20 ">
+        {darkToggle === "dark" ? (
           <img
-            className="w-full h-full"
+            className="w-full h-full duration-200 ease-linear"
+            src={require("./images/darkBg.jpg")}
+            alt="darkBg"
+          />
+        ) : (
+          <img
+            className="w-full h-full duration-200 ease-linear"
             src={require("./images/bg.jpg")}
             alt="bg"
           />
@@ -116,10 +128,10 @@ export default function App() {
         </div>
 
         {/* the submit form */}
-        <TodoForm onSubmit={addTodo} />
+        <TodoForm classList="duration-200 ease-linear" onSubmit={addTodo} />
 
         {/* todos & buttons controlers */}
-        <div className="max-w-full border shadow-md">
+        <div className="max-w-full duration-200 ease-linear border shadow-md">
           {/* The todos space */}
           <div>
             {todos.map((todo) => (
@@ -134,37 +146,33 @@ export default function App() {
           </div>
 
           {/* Add controle buttons */}
-          <div className="flex h-16 text-xs sm:text-sm font-semibold bg-white justify-evenly dark:bg-[#150050]">
+          <div className="duration-200 ease-linear flex h-16 text-xs sm:text-sm font-semibold bg-white justify-evenly dark:bg-[#150050]">
             {/* Add All button for show all the todos */}
             <button
-              className="transition-all hover:text-blue-600"
-              onClick={() => updateTodoShow("all")}
-            >
+              className="duration-200 ease-linear hover:text-blue-600"
+              onClick={() => updateTodoShow("all")}>
               All
             </button>
 
             {/* Add Active button for show only the uncompleted buttons */}
             <button
-              className="transition-all hover:text-blue-600"
-              onClick={() => updateTodoShow("active")}
-            >
+              className="duration-200 ease-linear hover:text-blue-600"
+              onClick={() => updateTodoShow("active")}>
               Active
             </button>
 
             {/* Add Complete button for show only the completed buttons */}
             <button
-              className="transition-all hover:text-blue-600"
-              onClick={() => updateTodoShow("complete")}
-            >
+              className="duration-200 ease-linear hover:text-blue-600"
+              onClick={() => updateTodoShow("complete")}>
               Completed
             </button>
 
             {/* Add Complete All button for make all the todos completed  */}
             {todos.some((todo) => todo.complete) ? (
               <button
-                className="transition-all hover:text-blue-600"
-                onClick={removeAllCompletedTodos}
-              >
+                className="duration-200 ease-linear hover:text-blue-600"
+                onClick={removeAllCompletedTodos}>
                 Clear completed
               </button>
             ) : (
@@ -176,7 +184,7 @@ export default function App() {
             {/* Add clear all button for make all the todos completed */}
             {todos.some((todo) => todo) ? (
               <button
-                className="transition-all hover:text-blue-600"
+                className="duration-200 ease-linear hover:text-blue-600"
                 onClick={() => {
                   setTodos(
                     todos.map((todo) => ({
@@ -185,8 +193,7 @@ export default function App() {
                     }))
                   );
                   setToggleAllComplete(!toggleAllComplete);
-                }}
-              >
+                }}>
                 Complete all
               </button>
             ) : (
@@ -200,8 +207,7 @@ export default function App() {
                     }))
                   );
                   setToggleAllComplete(!toggleAllComplete);
-                }}
-              >
+                }}>
                 Complete all
               </button>
             )}
