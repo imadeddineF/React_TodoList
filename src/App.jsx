@@ -1,6 +1,6 @@
 import './App.css';
 import { React, useState, useEffect } from 'react';
-import TodoForm from './components/todoFrom';
+import TodoForm from './components/todoInputForm';
 import Todo from './components/Todo';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
