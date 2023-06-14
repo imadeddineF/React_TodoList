@@ -1,24 +1,24 @@
-import "./App.css";
-import { React, useState, useEffect } from "react";
-import TodoForm from "./components/todoFrom";
-import Todo from "./components/Todo";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './App.css';
+import { React, useState, useEffect } from 'react';
+import TodoForm from './components/todoFrom';
+import Todo from './components/Todo';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { FaMoon } from "react-icons/fa";
-import { HiSun } from "react-icons/hi";
+import { FaMoon } from 'react-icons/fa';
+import { HiSun } from 'react-icons/hi';
 
 export default function App() {
   let [todos, setTodos] = useState(() => {
-    const localData = localStorage.getItem("todos");
+    const localData = localStorage.getItem('todos');
     return localData ? JSON.parse(localData) : [];
   });
   // Add the tasks to the Local Storage
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const [todoShow, setTodoShow] = useState("all");
+  const [todoShow, setTodoShow] = useState('all');
   const [toggleAllComplete, setToggleAllComplete] = useState(true);
 
   // Add tasks
@@ -51,9 +51,9 @@ export default function App() {
     );
   };
 
-  if (todoShow === "active") {
+  if (todoShow === 'active') {
     todos = todos.filter((todo) => !todo.complete);
-  } else if (todoShow === "complete") {
+  } else if (todoShow === 'complete') {
     todos = todos.filter((todo) => todo.complete);
   }
 
@@ -69,25 +69,25 @@ export default function App() {
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   const [darkToggle, setDarkToggle] = useState(null);
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkToggle("dark");
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkToggle('dark');
     } else {
-      setDarkToggle("light");
+      setDarkToggle('light');
     }
   }, []);
 
   const [themeIcon, setThemeIcon] = useState(null);
   useEffect(() => {
-    if (darkToggle === "dark") {
-      document.documentElement.classList.add("dark");
+    if (darkToggle === 'dark') {
+      document.documentElement.classList.add('dark');
       setThemeIcon(<FaMoon />);
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark');
       setThemeIcon(<HiSun />);
     }
   }, [darkToggle]);
   const handleThemeSwitcher = () => {
-    setDarkToggle(darkToggle === "dark" ? "light" : "dark");
+    setDarkToggle(darkToggle === 'dark' ? 'light' : 'dark');
   };
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -95,26 +95,29 @@ export default function App() {
     <>
       {/* Dark mode button  */}
       <button
-        className="absolute flex items-center justify-center w-16 h-16 text-3xl text-white duration-200 ease-linear rounded-full bg-blue-300/30 dark:bg-slate-800 top-8 right-8 hover:opacity-75"
-        onClick={handleThemeSwitcher}>
+        className="absolute flex items-center justify-center w-16 h-16 text-3xl text-white duration-300 ease-linear rounded-full hover:rounded-3xl bg-blue-300/30 dark:bg-slate-800 top-8 right-8 hover:opacity-75"
+        onClick={handleThemeSwitcher}
+      >
         {themeIcon}
       </button>
 
       {/* background image */}
-      <div className="h-[350px] duration-200 ease-linear w-full absolute top-0 left-0 -z-20 ">
-        {darkToggle === "dark" ? (
-          <img
-            className="w-full h-full duration-200 ease-linear"
-            src={require("./images/darkBg.jpg")}
-            alt="darkBg"
-          />
-        ) : (
-          <img
-            className="w-full h-full duration-200 ease-linear"
-            src={require("./images/bg.jpg")}
-            alt="bg"
-          />
-        )}
+      <div className="absolute min-h-screen w-screen -z-20 top-0 bg-white dark:bg-[#230046]">
+        <div className="h-[350px] duration-200 ease-linear w-full  ">
+          {darkToggle === 'dark' ? (
+            <img
+              className="w-full h-full duration-200 ease-linear"
+              src={require('./images/darkBg.jpg')}
+              alt="darkBg"
+            />
+          ) : (
+            <img
+              className="w-full h-full duration-200 ease-linear"
+              src={require('./images/bg.jpg')}
+              alt="bg"
+            />
+          )}
+        </div>
       </div>
 
       {/* The main todolist */}
@@ -133,7 +136,7 @@ export default function App() {
         {/* todos & buttons controlers */}
         <div className="max-w-full duration-200 ease-linear border shadow-md">
           {/* The todos space */}
-          <div>
+          <div className="min-h-[300px] md:min-h-[400px] lg:min-h-[400px] bg-gray-200 dark:bg-slate-800">
             {todos.map((todo) => (
               <Todo
                 key={todo.id}
@@ -150,21 +153,24 @@ export default function App() {
             {/* Add All button for show all the todos */}
             <button
               className="duration-200 ease-linear hover:text-blue-600"
-              onClick={() => updateTodoShow("all")}>
+              onClick={() => updateTodoShow('all')}
+            >
               All
             </button>
 
             {/* Add Active button for show only the uncompleted buttons */}
             <button
               className="duration-200 ease-linear hover:text-blue-600"
-              onClick={() => updateTodoShow("active")}>
+              onClick={() => updateTodoShow('active')}
+            >
               Active
             </button>
 
             {/* Add Complete button for show only the completed buttons */}
             <button
               className="duration-200 ease-linear hover:text-blue-600"
-              onClick={() => updateTodoShow("complete")}>
+              onClick={() => updateTodoShow('complete')}
+            >
               Completed
             </button>
 
@@ -172,7 +178,8 @@ export default function App() {
             {todos.some((todo) => todo.complete) ? (
               <button
                 className="duration-200 ease-linear hover:text-blue-600"
-                onClick={removeAllCompletedTodos}>
+                onClick={removeAllCompletedTodos}
+              >
                 Clear completed
               </button>
             ) : (
@@ -193,7 +200,8 @@ export default function App() {
                     }))
                   );
                   setToggleAllComplete(!toggleAllComplete);
-                }}>
+                }}
+              >
                 Complete all
               </button>
             ) : (
@@ -207,7 +215,8 @@ export default function App() {
                     }))
                   );
                   setToggleAllComplete(!toggleAllComplete);
-                }}>
+                }}
+              >
                 Complete all
               </button>
             )}
