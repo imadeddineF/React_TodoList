@@ -5,7 +5,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 const Todo = (props) => {
   const xMark = <FontAwesomeIcon icon={faXmark} size="lg" />;
   return (
-    <div className="duration-200 ease-linear flex hover:bg-gray-100 transition-all justify-between pl-5 text-gray-900 bg-white border-b h-[80px] dark:text-white dark:bg-[#610094]">
+    <div className="duration-200 ease-linear flex hover:bg-gray-100 transition-all justify-between pl-5 text-gray-900 bg-white border-b h-[70px] dark:text-white dark:bg-[#610094]">
       <div
         onClick={props.toggleComplete}
         className="flex items-center max-w-full my-auto overflow-hidden duration-200 ease-linear cursor-pointer focus:line-through"
